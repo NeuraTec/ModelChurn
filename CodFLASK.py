@@ -1,24 +1,66 @@
 from flask import Flask, request, jsonify
 import joblib
-import numpy as np
 import pandas as pd
 
 app = Flask(__name__)
 
-# Carga el modelo una vez
+# Carga el modelo y encoder (si existe)
 modelo = joblib.load('modelo_churn_pipeline.pkl')
-encoder = joblib.load('target_encoder_churn.pkl')  # Solo si lo usas
 
+try:
+    encoder = joblib.load('target_encoder_churn.pkl')
+except Exception:
+    encoder = None
+
+# Define la lista de campos esperados (los 19 campos que usas en el sample_data)
+expected_fields = [
+    "SeniorCitizen",
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges",
+    "gender",
+    "Partner",
+    "Dependents",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod"
+]
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = request.get_json()  # JSON con los 20 campos
-    df = pd.DataFrame([data])
-    proba = modelo.predict_proba(df)[:, 1][0]
-    pred = 1 if proba >= 0.4 else 0
+    data = request.get_json()
 
-    # Si tienes encoder, convierte a texto. Si no, queda en 0/1
-    label = encoder.inverse_transform([pred])[0] if encoder else str(pred)
+    if not data:
+        return jsonify({'error': 'No JSON data received'}), 400
+
+    # Validar que tenga todos los campos esperados
+    missing_fields = [f for f in expected_fields if f not in data]
+    if missing_fields:
+        return jsonify({'error': f'Faltan campos: {missing_fields}'}), 400
+
+    # Convertir a DataFrame para alimentar el pipeline
+    df = pd.DataFrame([data])
+
+    try:
+        proba = modelo.predict_proba(df)[:, 1][0]
+        pred = 1 if proba >= 0.4 else 0
+    except Exception as e:
+        return jsonify({'error': f'Error al hacer la predicción: {str(e)}'}), 500
+
+    if encoder:
+        label = encoder.inverse_transform([pred])[0]
+    else:
+        label = pred
+
     return jsonify({
         'probability': round(proba, 4),
         'prediction': label

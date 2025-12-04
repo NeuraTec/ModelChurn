@@ -1,7 +1,0 @@
-flask
-gunicorn
-joblib
-numpy
-pandas
-scikit-learn==1.6.1
-imbalanced-learn

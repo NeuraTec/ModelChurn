@@ -1,0 +1,24 @@
+feature
+num__tenure
+num__MonthlyCharges
+num__TotalCharges
+cat__gender_Female
+cat__gender_Male
+cat__Partner_No
+cat__Partner_Yes
+cat__Dependents_Yes
+cat__MultipleLines_Yes
+cat__InternetService_Fiber optic
+cat__OnlineSecurity_No
+cat__OnlineSecurity_Yes
+cat__OnlineBackup_No
+cat__DeviceProtection_No
+cat__TechSupport_No
+cat__TechSupport_Yes
+cat__Contract_Month-to-month
+cat__Contract_One year
+cat__Contract_Two year
+cat__PaperlessBilling_No
+cat__PaperlessBilling_Yes
+cat__PaymentMethod_Credit card (automatic)
+cat__PaymentMethod_Electronic check

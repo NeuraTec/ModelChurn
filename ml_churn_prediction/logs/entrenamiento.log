@@ -1,0 +1,693 @@
+2026-02-08 12:34:12,616 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 12:34:12,645 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 12:38:17,851 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 12:38:17,852 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 12:38:18,203 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 12:38:18,427 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 12:38:18,447 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 12:38:18,448 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 12:38:18,535 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 12:38:18,541 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 12:38:18,580 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 12:38:18,614 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 12:38:18,615 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 12:38:18,621 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 12:38:23,595 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 12:38:26,459 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 12:38:27,036 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 12:38:27,740 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 12:38:28,471 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 12:38:29,204 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 12:38:29,881 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 12:38:30,815 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 12:38:30,856 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 12:38:30,907 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 12:38:32,319 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 12:38:32,324 - INFO - Dividiendo datos en train y test...
+2026-02-08 12:38:32,382 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 12:38:32,389 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 12:38:32,390 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 12:40:52,853 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 12:40:52,854 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 12:40:55,407 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 12:40:55,408 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 12:41:07,703 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 12:41:07,704 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 12:41:37,634 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 12:41:37,686 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 13:23:48,876 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 13:23:48,902 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 13:23:49,344 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 13:23:49,569 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 13:23:49,590 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 13:23:49,591 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 13:23:49,645 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 13:23:49,649 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 13:23:49,686 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 13:23:49,744 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 13:23:49,745 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 13:23:49,747 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 13:23:51,361 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 13:23:52,889 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 13:23:53,317 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 13:23:53,748 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 13:23:54,133 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 13:23:54,588 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 13:23:55,000 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 13:23:55,449 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 13:23:55,450 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 13:23:55,467 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 13:23:55,903 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 13:23:55,907 - INFO - Dividiendo datos en train y test...
+2026-02-08 13:23:55,961 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 13:23:55,965 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 13:23:55,966 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 13:24:41,790 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 13:24:41,790 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 13:24:44,271 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 13:24:44,271 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 13:24:56,906 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 13:24:56,907 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 13:25:26,283 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 13:25:26,284 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 13:28:40,199 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-08 13:28:47,741 - INFO - ✅ Features seleccionadas: 23
+2026-02-08 13:28:49,555 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-08 13:28:49,556 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-08 13:29:24,679 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-08 13:29:24,705 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-08 13:29:36,261 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-08 13:29:39,105 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-08 13:29:39,123 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-08 13:29:39,602 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-08 13:29:42,370 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-08 13:29:43,147 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-08 13:29:43,148 - INFO - 🎉 Proceso completado correctamente
+2026-02-08 13:48:23,237 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 13:48:23,238 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 13:48:23,316 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 13:48:23,340 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 13:48:23,346 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 13:48:23,347 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 13:48:23,351 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 13:48:23,353 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 13:48:23,369 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 13:48:23,386 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 13:48:23,387 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 13:48:23,387 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 13:48:24,185 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 13:48:24,958 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 13:48:25,117 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 13:48:25,340 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 13:48:25,563 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 13:48:25,782 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 13:48:26,007 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 13:48:26,261 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 13:48:26,262 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 13:48:26,267 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 13:48:26,561 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 13:48:26,563 - INFO - Dividiendo datos en train y test...
+2026-02-08 13:48:26,575 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 13:48:26,577 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 13:48:26,577 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 13:49:14,716 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 13:49:14,717 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 13:49:15,985 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 13:49:15,985 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 13:49:23,998 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 13:49:23,998 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 13:49:45,474 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 13:49:45,474 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 13:50:12,934 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-08 13:50:13,102 - INFO - ✅ Features seleccionadas: 23
+2026-02-08 13:50:13,103 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-08 13:50:13,104 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-08 13:50:15,839 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-08 13:50:15,840 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-08 13:50:21,396 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-08 13:50:22,294 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-08 13:50:22,296 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-08 13:50:22,306 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-08 13:50:22,764 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-08 13:50:23,008 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-08 13:50:23,009 - INFO - 🎉 Proceso completado correctamente
+2026-02-08 20:26:16,027 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 20:26:16,064 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 20:26:16,412 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 20:26:16,708 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 20:26:16,719 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 20:26:16,720 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 20:26:16,758 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 20:26:16,764 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 20:26:16,813 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 20:26:16,888 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 20:26:16,890 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 20:26:16,892 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 20:26:18,028 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 20:26:19,435 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 20:26:19,895 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 20:26:20,318 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 20:26:20,707 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 20:26:21,153 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 20:26:21,566 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 20:26:21,982 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 20:26:21,992 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 20:26:22,038 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 20:26:22,698 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 20:26:22,704 - INFO - Dividiendo datos en train y test...
+2026-02-08 20:26:22,763 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 20:26:22,768 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 20:26:22,769 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 20:26:44,747 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 20:26:44,748 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 20:26:47,271 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 20:26:47,271 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 20:26:59,383 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 20:26:59,384 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 20:27:28,148 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 20:27:28,149 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 20:28:12,099 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-08 20:28:12,635 - INFO - ✅ Features seleccionadas: 23
+2026-02-08 20:28:12,636 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-08 20:28:12,638 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-08 20:28:17,804 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-08 20:28:17,805 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-08 20:28:31,662 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-08 20:28:33,643 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-08 20:28:33,718 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-08 20:28:33,745 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-08 20:28:34,630 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-08 20:28:35,387 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-08 20:28:35,389 - INFO - 🎉 Proceso completado correctamente
+2026-02-08 20:49:50,595 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 20:49:50,622 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 20:49:50,897 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 20:49:51,116 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 20:49:51,128 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 20:49:51,128 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 20:49:51,173 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 20:49:51,179 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 20:49:51,231 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 20:49:51,277 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 20:49:51,279 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 20:49:51,281 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 20:49:52,468 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 20:49:53,970 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 20:49:54,361 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 20:49:54,791 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 20:49:55,207 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 20:49:55,645 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 20:49:56,044 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 20:49:56,568 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 20:49:56,569 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 20:49:56,602 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 20:49:57,125 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 20:49:57,131 - INFO - Dividiendo datos en train y test...
+2026-02-08 20:49:57,188 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 20:49:57,194 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 20:49:57,196 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 20:51:25,668 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 20:51:25,760 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 20:51:28,491 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 20:51:28,492 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 20:51:41,903 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 20:51:41,904 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 20:52:12,781 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 20:52:12,782 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 20:53:25,874 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-08 20:53:26,480 - INFO - ✅ Features seleccionadas: 23
+2026-02-08 20:53:26,593 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-08 20:53:26,596 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-08 20:53:35,031 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-08 20:53:35,032 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-08 20:53:44,880 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-08 20:53:46,577 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-08 20:53:46,589 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-08 20:53:46,680 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-08 20:53:47,549 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-08 20:53:47,814 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-08 20:53:47,815 - INFO - 🎉 Proceso completado correctamente
+2026-02-08 21:00:12,573 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 21:00:12,574 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 21:00:12,742 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 21:00:12,804 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 21:00:12,818 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 21:00:12,819 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 21:00:12,828 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 21:00:12,832 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 21:00:12,857 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 21:00:12,886 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 21:00:12,888 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 21:00:12,890 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 21:00:14,101 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 21:00:15,613 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 21:00:15,922 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 21:00:16,320 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 21:00:16,678 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 21:00:17,087 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 21:00:17,571 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 21:00:17,967 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 21:00:17,968 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 21:00:17,977 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 21:00:18,401 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 21:00:18,406 - INFO - Dividiendo datos en train y test...
+2026-02-08 21:00:18,432 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 21:00:18,437 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 21:00:18,438 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 21:00:34,063 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 21:00:34,065 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 21:00:36,518 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 21:00:36,519 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 21:00:48,240 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 21:00:48,240 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 21:01:17,746 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 21:01:17,747 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 21:02:08,011 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-08 21:02:08,180 - INFO - ✅ Features seleccionadas: 23
+2026-02-08 21:02:08,181 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-08 21:02:08,182 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-08 21:02:13,829 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-08 21:02:13,830 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-08 21:02:23,383 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-08 21:02:25,087 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-08 21:02:25,092 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-08 21:02:25,141 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-08 21:02:25,946 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-08 21:02:26,131 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-08 21:02:26,133 - INFO - 🎉 Proceso completado correctamente
+2026-02-08 21:09:47,100 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 21:09:47,101 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 21:09:47,261 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 21:09:47,305 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 21:09:47,318 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 21:09:47,319 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 21:09:47,326 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 21:09:47,331 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 21:09:47,371 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 21:09:47,410 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 21:09:47,411 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 21:09:47,413 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 21:09:48,173 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 21:09:49,575 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 21:09:49,805 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 21:09:50,334 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 21:09:50,779 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 21:09:51,212 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 21:09:51,589 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 21:09:52,078 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 21:09:52,079 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 21:09:52,088 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 21:09:52,540 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 21:09:52,546 - INFO - Dividiendo datos en train y test...
+2026-02-08 21:09:52,571 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 21:09:52,575 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 21:09:52,576 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 21:10:23,036 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 21:10:23,104 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 21:10:25,757 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 21:10:25,758 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 21:10:38,283 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 21:10:38,284 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 21:11:08,738 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 21:11:08,739 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 21:11:57,932 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-08 21:11:58,086 - INFO - ✅ Features seleccionadas: 23
+2026-02-08 21:11:58,087 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-08 21:11:58,088 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-08 21:12:02,817 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-08 21:12:02,818 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-08 21:12:13,383 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-08 21:12:15,329 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-08 21:12:15,333 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-08 21:12:15,354 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-08 21:12:16,454 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-08 21:12:17,101 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-08 21:12:17,103 - INFO - 🎉 Proceso completado correctamente
+2026-02-08 21:15:24,967 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-08 21:15:24,968 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-08 21:15:25,141 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-08 21:15:25,204 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-08 21:15:25,212 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-08 21:15:25,213 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-08 21:15:25,219 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-08 21:15:25,224 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-08 21:15:25,264 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-08 21:15:25,379 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-08 21:15:25,380 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-08 21:15:25,383 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-08 21:15:26,316 - INFO - 📊 Generando histogramas numéricos...
+2026-02-08 21:15:27,979 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-08 21:15:28,265 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-08 21:15:28,799 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-08 21:15:29,258 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-08 21:15:29,704 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-08 21:15:30,106 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-08 21:15:30,580 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-08 21:15:30,581 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-08 21:15:30,601 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-08 21:15:31,064 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-08 21:15:31,068 - INFO - Dividiendo datos en train y test...
+2026-02-08 21:15:31,092 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-08 21:15:31,096 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-08 21:15:31,097 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-08 21:16:10,999 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-08 21:16:11,000 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-08 21:16:13,639 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-08 21:16:13,640 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-08 21:16:25,509 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-08 21:16:25,510 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-08 21:16:53,746 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-08 21:16:53,747 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-08 21:17:25,087 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-08 21:17:25,185 - INFO - ✅ Features seleccionadas: 23
+2026-02-08 21:17:25,187 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-08 21:17:25,189 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-08 21:17:29,143 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-08 21:17:29,143 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-08 21:17:38,349 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-08 21:17:39,698 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-08 21:17:39,701 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-08 21:17:39,728 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-08 21:17:40,508 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-08 21:17:40,720 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-08 21:17:40,721 - INFO - 🎉 Proceso completado correctamente
+2026-02-09 16:28:10,633 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-09 16:28:10,703 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-09 16:28:11,247 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-09 16:28:11,463 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-09 16:28:11,475 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-09 16:28:11,475 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-09 16:28:11,523 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-09 16:28:11,528 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-09 16:28:11,572 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-09 16:28:11,652 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-09 16:28:11,654 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-09 16:28:11,656 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-09 16:28:13,332 - INFO - 📊 Generando histogramas numéricos...
+2026-02-09 16:28:14,900 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-09 16:28:15,406 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-09 16:28:15,817 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-09 16:28:16,244 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-09 16:28:16,650 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-09 16:28:17,076 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-09 16:28:17,558 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-09 16:28:17,559 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-09 16:28:17,578 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-09 16:28:18,066 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-09 16:28:18,072 - INFO - Dividiendo datos en train y test...
+2026-02-09 16:28:18,161 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-09 16:28:18,166 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-09 16:28:18,167 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-09 16:29:38,212 - INFO - logistic_l1 → Best CV F2-score: 0.7226
+2026-02-09 16:29:38,213 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-09 16:29:41,465 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-09 16:29:41,465 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-09 16:29:56,886 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-09 16:29:56,887 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-09 16:30:35,115 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-09 16:30:35,116 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-09 16:32:04,202 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-09 16:32:10,851 - INFO - ✅ Features seleccionadas: 23
+2026-02-09 16:32:12,771 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-09 16:32:12,983 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-09 16:32:36,139 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-09 16:32:36,485 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-09 16:32:52,235 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-09 16:32:55,478 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-09 16:32:55,695 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-09 16:32:55,818 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-09 16:32:58,768 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-09 16:33:01,841 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-09 16:33:01,842 - INFO - 🎉 Proceso completado correctamente
+2026-02-09 16:51:30,101 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-02-09 16:51:30,146 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-02-09 16:51:30,713 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-02-09 16:51:31,318 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-02-09 16:51:31,337 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-02-09 16:51:31,338 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-02-09 16:51:31,597 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-02-09 16:51:31,604 - INFO - 🗑️ Columna eliminada: customerID
+2026-02-09 16:51:31,633 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-02-09 16:51:31,741 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-02-09 16:51:31,742 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-02-09 16:51:31,745 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-02-09 16:51:43,388 - INFO - 📊 Generando histogramas numéricos...
+2026-02-09 16:51:45,531 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-02-09 16:51:48,362 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-02-09 16:51:49,062 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-02-09 16:51:49,744 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-02-09 16:51:50,382 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-02-09 16:51:50,884 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-02-09 16:51:51,400 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-02-09 16:51:51,401 - INFO - 🔎 Detectando outliers por IQR...
+2026-02-09 16:51:51,480 - INFO - 📈 Graficando mapa de correlaciones...
+2026-02-09 16:51:52,594 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-02-09 16:51:52,598 - INFO - Dividiendo datos en train y test...
+2026-02-09 16:51:53,377 - INFO - Datos divididos: Train=5608, Test=1402
+2026-02-09 16:51:53,381 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-02-09 16:51:53,382 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-02-09 16:56:16,875 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-02-09 16:56:16,990 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-02-09 16:56:20,263 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-02-09 16:56:20,264 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-02-09 16:56:37,703 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-02-09 16:56:37,756 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-02-09 16:57:18,147 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-02-09 16:57:18,148 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-02-09 16:58:31,096 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-02-09 16:58:33,027 - INFO - ✅ Features seleccionadas: 23
+2026-02-09 16:58:33,408 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-02-09 16:58:33,498 - INFO - 🔍 Generando explicaciones SHAP...
+2026-02-09 16:58:44,807 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-02-09 16:58:44,935 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-02-09 16:58:56,208 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-02-09 16:58:58,377 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-02-09 16:58:58,448 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-02-09 16:58:58,523 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-02-09 16:58:59,652 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-02-09 16:58:59,981 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-02-09 16:58:59,982 - INFO - 🎉 Proceso completado correctamente
+2026-03-09 17:13:22,099 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-03-09 17:13:22,134 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-03-09 17:13:22,525 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-03-09 17:13:22,826 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-03-09 17:13:22,851 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-03-09 17:13:22,852 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-03-09 17:13:22,900 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-03-09 17:13:22,919 - INFO - 🗑️ Columna eliminada: customerID
+2026-03-09 17:13:22,981 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-03-09 17:13:23,159 - INFO - Dataset limpio guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\processed\telco_churn_clean.csv
+2026-03-09 17:13:23,228 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-03-09 17:13:23,229 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-03-09 17:13:23,231 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-03-09 17:13:25,009 - INFO - 📊 Generando histogramas numéricos...
+2026-03-09 17:13:27,123 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-03-09 17:13:27,632 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-03-09 17:13:28,211 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-03-09 17:13:28,837 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-03-09 17:13:29,465 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-03-09 17:13:30,139 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-03-09 17:13:30,846 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-03-09 17:13:30,847 - INFO - 🔎 Detectando outliers por IQR...
+2026-03-09 17:13:30,885 - INFO - 📈 Graficando mapa de correlaciones...
+2026-03-09 17:13:31,577 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-03-09 17:13:31,583 - INFO - Dividiendo datos en train y test...
+2026-03-09 17:13:31,645 - INFO - Datos divididos: Train=5608, Test=1402
+2026-03-09 17:13:31,650 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-03-09 17:13:31,650 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-03-09 17:14:57,719 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-03-09 17:14:57,720 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-03-09 17:15:00,595 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-03-09 17:15:00,596 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-03-09 17:15:17,645 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-03-09 17:15:17,647 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-03-09 17:15:52,920 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-03-09 17:15:52,921 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-03-09 17:16:45,602 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-03-09 17:16:47,090 - INFO - ✅ Features seleccionadas: 23
+2026-03-09 17:16:48,473 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-03-09 17:16:48,474 - INFO - 🔍 Generando explicaciones SHAP...
+2026-03-09 17:16:56,411 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-03-09 17:16:56,412 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-03-09 17:17:13,847 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-03-09 17:17:17,703 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-03-09 17:17:18,828 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-03-09 17:17:18,928 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-03-09 17:17:21,387 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-03-09 17:17:24,107 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-03-09 17:17:24,143 - INFO - 🎉 Proceso completado correctamente
+2026-03-14 12:09:36,230 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-03-14 12:09:36,306 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-03-14 12:09:36,790 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-03-14 12:09:37,013 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-03-14 12:09:37,048 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-03-14 12:09:37,049 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-03-14 12:09:37,093 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-03-14 12:09:37,100 - INFO - 🗑️ Columna eliminada: customerID
+2026-03-14 12:09:37,186 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-03-14 12:09:37,399 - INFO - Dataset limpio guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\processed\telco_churn_clean.csv
+2026-03-14 12:09:37,482 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-03-14 12:09:37,482 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-03-14 12:09:37,485 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-03-14 12:09:39,117 - INFO - 📊 Generando histogramas numéricos...
+2026-03-14 12:09:41,918 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-03-14 12:09:42,428 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-03-14 12:09:43,104 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-03-14 12:09:43,846 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-03-14 12:09:44,596 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-03-14 12:09:45,405 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-03-14 12:09:46,397 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-03-14 12:09:46,398 - INFO - 🔎 Detectando outliers por IQR...
+2026-03-14 12:09:46,478 - INFO - 📈 Graficando mapa de correlaciones...
+2026-03-14 12:09:47,460 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-03-14 12:09:47,465 - INFO - Dividiendo datos en train y test...
+2026-03-14 12:09:47,533 - INFO - Datos divididos: Train=5608, Test=1402
+2026-03-14 12:09:47,538 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-03-14 12:09:47,539 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-03-14 12:10:54,510 - INFO - logistic_l1 → Best CV F2-score: 0.7225
+2026-03-14 12:10:54,510 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-03-14 12:10:58,111 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-03-14 12:10:58,112 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-03-14 12:11:15,786 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-03-14 12:11:15,787 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-03-14 12:11:58,866 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-03-14 12:11:58,868 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-03-14 12:15:29,516 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-03-14 12:15:32,094 - INFO - ✅ Features seleccionadas: 23
+2026-03-14 12:15:33,654 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-03-14 12:15:33,847 - INFO - 🔍 Generando explicaciones SHAP...
+2026-03-14 12:15:53,740 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-03-14 12:15:53,742 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-03-14 12:16:10,788 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-03-14 12:16:13,818 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-03-14 12:16:14,018 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-03-14 12:16:14,173 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-03-14 12:16:15,703 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-03-14 12:16:18,529 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-03-14 12:16:18,636 - INFO - 🎉 Proceso completado correctamente
+2026-04-13 20:50:55,030 - INFO - 🔧 Iniciando proceso con configuración YAML
+2026-04-13 20:50:55,079 - INFO - 📥 Cargando dataset desde C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\raw\WA_Fn-UseC_-Telco-Customer-Churn.csv
+2026-04-13 20:50:55,620 - INFO - ✅ Dataset cargado. Shape: (7043, 21)
+2026-04-13 20:50:55,998 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\raw/dataset_raw_info.txt
+2026-04-13 20:50:56,009 - INFO - 🔄 TotalCharges convertido de object a float64
+2026-04-13 20:50:56,010 - INFO - 💧 Nulos en TotalCharges después de convertir: 11
+2026-04-13 20:50:56,138 - INFO - ✅ Filas eliminadas por TotalCharges. Nulos restantes: 0
+2026-04-13 20:50:56,145 - INFO - 🗑️ Columna eliminada: customerID
+2026-04-13 20:50:56,212 - INFO - 🗑️ Filas duplicadas eliminadas: 22
+2026-04-13 20:50:56,492 - INFO - Dataset limpio guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\data\processed\telco_churn_clean.csv
+2026-04-13 20:50:56,576 - INFO - 📄 Reporte generado: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean/dataset_limpio_info.txt
+2026-04-13 20:50:56,578 - INFO - 🔍 Iniciando generación del reporte EDA...
+2026-04-13 20:50:56,580 - INFO - 🎯 Graficando distribución del target 'Churn'...
+2026-04-13 20:50:58,384 - INFO - 📊 Generando histogramas numéricos...
+2026-04-13 20:51:00,450 - INFO - 📐 [EDA | Chi-cuadrado] Seleccionando variables categóricas relevantes...
+2026-04-13 20:51:00,977 - INFO - ✅ [EDA | Chi-cuadrado] Features categóricas seleccionadas para el modelo: ['Contract', 'OnlineSecurity', 'TechSupport', 'InternetService', 'PaymentMethod']
+2026-04-13 20:51:01,570 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_Contract_vs_churn.png
+2026-04-13 20:51:02,148 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_OnlineSecurity_vs_churn.png
+2026-04-13 20:51:02,740 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_TechSupport_vs_churn.png
+2026-04-13 20:51:03,416 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_InternetService_vs_churn.png
+2026-04-13 20:51:03,997 - INFO - 🖼️ [EDA | Chi-cuadrado] Gráfico guardado: cat_PaymentMethod_vs_churn.png
+2026-04-13 20:51:03,999 - INFO - 🔎 Detectando outliers por IQR...
+2026-04-13 20:51:04,027 - INFO - 📈 Graficando mapa de correlaciones...
+2026-04-13 20:51:04,795 - INFO - ✅ Reporte EDA generado correctamente en 'C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\eda\clean'.
+2026-04-13 20:51:04,803 - INFO - Dividiendo datos en train y test...
+2026-04-13 20:51:04,862 - INFO - Datos divididos: Train=5608, Test=1402
+2026-04-13 20:51:04,867 - INFO - 🔄 Entrenando modelos (sin cross_val_predict)...
+2026-04-13 20:51:04,868 - INFO - 
+➡️ Entrenando pipeline: logistic_l1
+2026-04-13 20:52:00,946 - INFO - logistic_l1 → Best CV F2-score: 0.7226
+2026-04-13 20:52:00,947 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_no_fs
+2026-04-13 20:52:03,490 - INFO - logistic_l2_no_fs → Best CV F2-score: 0.7202
+2026-04-13 20:52:03,491 - INFO - 
+➡️ Entrenando pipeline: logistic_l2_fs
+2026-04-13 20:52:19,303 - INFO - logistic_l2_fs → Best CV F2-score: 0.7253
+2026-04-13 20:52:19,304 - INFO - 
+➡️ Entrenando pipeline: rf_fs
+2026-04-13 20:52:54,575 - INFO - rf_fs → Best CV F2-score: 0.6639
+2026-04-13 20:52:54,576 - INFO - 
+➡️ Entrenando pipeline: lgbm_fs
+2026-04-13 20:53:58,488 - INFO - lgbm_fs → Best CV F2-score: 0.7074
+2026-04-13 20:53:58,643 - INFO - ✅ Features seleccionadas: 23
+2026-04-13 20:53:58,644 - INFO - 📁 Features guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\feature_selection\features_seleccionadas_logistic_l2_fs_median.csv
+2026-04-13 20:53:58,645 - INFO - 🔍 Generando explicaciones SHAP...
+2026-04-13 20:54:06,755 - INFO - ✅ SHAP guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability/shap_summary_logistic_l2_fs_median.png
+2026-04-13 20:54:06,757 - INFO - 
+📊 Ajustando threshold de decisión...
+2026-04-13 20:54:24,370 - INFO - ✅ Threshold tuning guardado | CSV: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics | Gráfico: C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\reports\threshold_tuning_F2.png
+2026-04-13 20:54:26,679 - INFO - 🧩 Matriz de confusión guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\matriz_confusion_logistic_l2_fs_median.png
+2026-04-13 20:54:26,692 - INFO - 📊 Métricas finales guardadas en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\metrics_final_logistic_l2_fs_median.json
+2026-04-13 20:54:26,717 - INFO - 📋 Classification report guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\metrics\classification_report_logistic_l2_fs_median.txt
+2026-04-13 20:54:28,168 - INFO - 📈 Distribución de probabilidades guardada en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\explainability\distribucion_probabilidades_logistic_l2_fs_median.png
+2026-04-13 20:54:28,943 - INFO - ✅ Modelo guardado en C:\Users\Hector Cespedes\Documents\ml_churn_prediction\artifacts\models/mejor_modelo_median.pkl
+2026-04-13 20:54:28,944 - INFO - 🎉 Proceso completado correctamente

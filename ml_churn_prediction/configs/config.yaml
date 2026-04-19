@@ -1,0 +1,39 @@
+random_state: 42
+
+paths:
+  dataset: data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv
+  processed_data: data/processed/telco_churn_clean.csv
+  logs: logs
+  models: artifacts/models
+  metrics: artifacts/metrics
+  explainability: artifacts/explainability
+  reports: artifacts/reports
+  feature_selection: artifacts/feature_selection
+
+eda:
+  generar: true
+  subcarpeta: eda
+
+limpieza:
+  convertir_numericas:
+    - TotalCharges
+  eliminar_nulos:
+    - TotalCharges
+  eliminar_columnas:
+    - customerID
+
+split:
+  test_size: 0.2
+  cv_folds: 5
+
+threshold:
+  beta: 2
+  default: 0.4
+  rango:
+    inicio: 0.2
+    fin: 0.6
+    paso: 0.05
+
+feature_selection:
+  usar: true
+  threshold: median

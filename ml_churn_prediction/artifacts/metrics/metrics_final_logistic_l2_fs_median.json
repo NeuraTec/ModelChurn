@@ -1,0 +1,11 @@
+{
+    "model": "logistic_l2_fs_median",
+    "dataset": "test",
+    "precision": 0.47,
+    "recall": 0.857,
+    "f1": 0.607,
+    "f2": 0.736,
+    "auc": 0.843,
+    "threshold": 0.45,
+    "evaluated_at": "2026-04-13T20:54:26.680764"
+}

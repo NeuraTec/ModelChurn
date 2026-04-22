@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
 import logging
-
+import os
 # ============================================================
 # CONFIGURACIÓN
 # ============================================================
@@ -14,11 +14,12 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
 
-MODEL_FILENAME = "mejor_modelo_median.pkl"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "mejor_modelo_median.pkl")
 
 try:
-    modelo = joblib.load(MODEL_FILENAME)
-    logging.info(f"Modelo cargado correctamente: {MODEL_FILENAME}")
+    modelo = joblib.load(MODEL_PATH)
+    logging.info(f"Modelo cargado correctamente desde: {MODEL_PATH}")
 except Exception as e:
     logging.error(f"No se pudo cargar el modelo: {str(e)}")
     modelo = None
@@ -150,7 +151,7 @@ def predict():
             "label": label,
             "probability": round(float(proba), 4),
             "threshold_used": threshold,
-            "model": MODEL_FILENAME
+            "model": os.path.basename(MODEL_PATH)
         })
 
     except Exception as e:

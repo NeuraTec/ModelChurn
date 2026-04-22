@@ -168,7 +168,9 @@ if st.button("Analizar Perfil del Cliente"):
             try:
                 # Simulamos una pequeña pausa para que el cliente sienta que la IA "piensa"
                 time.sleep(1) 
-                response = requests.post(API_URL, json=data)
+                response = requests.post(API_URL, json=data, timeout=30)
+                
+               
 
                 if response.status_code == 200:
                     result = response.json()
@@ -202,10 +204,10 @@ if st.button("Analizar Perfil del Cliente"):
                         """, unsafe_allow_html=True)
                         st.balloons()
                 else:
-                    st.error("Servicio temporalmente no disponible. Inténtelo en unos instantes.")
+                    st.error(f"Error API: {response.status_code} - {response.text}")
 
             except Exception as e:
-                st.error("Error de conexión con el servidor de inteligencia.")
+                st.error(f"Error de conexión: {str(e)}")
 
 # Pie de página profesional
 st.markdown("""

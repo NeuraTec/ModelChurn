@@ -3,6 +3,7 @@ import joblib
 import pandas as pd
 import logging
 import os
+
 # ============================================================
 # CONFIGURACIÓN
 # ============================================================
@@ -25,7 +26,7 @@ except Exception as e:
     modelo = None
 
 # ============================================================
-# CATEGORÍAS PERMITIDAS (ORIGINALES)
+# CATEGORÍAS
 # ============================================================
 
 valid_categories = {
@@ -55,39 +56,28 @@ numeric_fields = ["SeniorCitizen", "tenure", "MonthlyCharges", "TotalCharges"]
 expected_fields = list(valid_categories.keys()) + numeric_fields
 
 # ============================================================
-# NORMALIZADOR FLEXIBLE
+# NORMALIZADOR
 # ============================================================
 
 def normalize(value: str):
-    """
-    Normaliza la entrada del usuario:
-    - Todo a minúsculas
-    - Reemplaza guiones y guiones bajos por espacios
-    - Elimina espacios repetidos
-    """
     value = value.lower().replace("_", " ").replace("-", " ")
-    value = " ".join(value.split())  # elimina espacios dobles
-    return value
+    return " ".join(value.split())
 
-# Crear diccionario normalizado para búsqueda rápida
 normalized_categories = {
     field: {normalize(v): v for v in allowed_values}
     for field, allowed_values in valid_categories.items()
 }
 
 # ============================================================
-# VALIDACIÓN DE ENTRADAS
+# VALIDACIÓN
 # ============================================================
 
 def validate_input(data):
-    """Valida campos numéricos y categorías FLEXIBLES."""
 
-    # 1️⃣ Campos faltantes
     missing = [f for f in expected_fields if f not in data]
     if missing:
         return False, f"Faltan campos requeridos: {missing}"
 
-    # 2️⃣ Validación numérica y evitar negativos
     for f in numeric_fields:
         try:
             data[f] = float(data[f])
@@ -97,11 +87,9 @@ def validate_input(data):
         if data[f] < 0:
             return False, f"El campo '{f}' no puede ser negativo."
 
-    # 3️⃣ Validación de SeniorCitizen
     if data["SeniorCitizen"] not in [0, 1]:
         return False, "SeniorCitizen debe ser 0 o 1."
 
-    # 4️⃣ Validación FLEXIBLE de categorías
     for field, allowed_dict in normalized_categories.items():
         raw_value = str(data[field])
         key = normalize(raw_value)
@@ -113,21 +101,22 @@ def validate_input(data):
                 f"Valores permitidos: {list(allowed_dict.values())}"
             )
 
-        # Reemplazar por el valor oficial
         data[field] = allowed_dict[key]
 
     return True, None
 
 # ============================================================
-# Punto de Predicción
+# PREDICT
 # ============================================================
 
 @app.route("/predict", methods=["POST"])
 def predict():
+
     if modelo is None:
         return jsonify({"error": "El modelo no está disponible"}), 500
 
     data = request.get_json()
+
     if not data:
         return jsonify({"error": "No se recibió JSON"}), 400
 
@@ -143,7 +132,7 @@ def predict():
         pred = int(proba >= threshold)
         label = "Churn" if pred == 1 else "No Churn"
 
-        logging.info(f"Predicción realizada: proba={proba:.4f}, pred={pred}")
+        logging.info(f"Predicción: proba={proba:.4f}, pred={pred}")
 
         return jsonify({
             "success": True,
@@ -156,10 +145,21 @@ def predict():
 
     except Exception as e:
         logging.error(f"Error en predicción: {str(e)}")
-        return jsonify({"error": "Hubo un error procesando la predicción"}), 500
+        return jsonify({"error": "Error procesando la predicción"}), 500
 
 # ============================================================
-# ESTADO DEL SERVICIO
+# HEALTH CHECK (PRO)
+# ============================================================
+
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({
+        "status": "ok",
+        "model_loaded": modelo is not None
+    })
+
+# ============================================================
+# HOME
 # ============================================================
 
 @app.route("/", methods=["GET"])
@@ -171,7 +171,7 @@ def home():
     })
 
 # ============================================================
-#INICIAR SERVIDOR
+# RUN
 # ============================================================
 
 if __name__ == "__main__":

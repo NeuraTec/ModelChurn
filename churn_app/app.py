@@ -15,29 +15,70 @@ st.set_page_config(page_title="NeuraTec | Churn Analytics", layout="centered")
 if "loading" not in st.session_state:
     st.session_state.loading = False
 
-if "errors" not in st.session_state:
-    st.session_state.errors = {}
+if "submitted" not in st.session_state:
+    st.session_state.submitted = False
 
 # =========================================================
-# API
+# VALIDACIÓN DINÁMICA
+# =========================================================
+def validar_numero(valor):
+    try:
+        float(valor)
+        return True
+    except:
+        return False
+
+def campo_input(label, key, placeholder, tipo="text"):
+    valor = st.text_input(label, key=key, placeholder=placeholder)
+
+    error = None
+
+    if st.session_state.submitted:
+        if valor == "":
+            error = "Este campo es obligatorio"
+        elif tipo == "numero" and not validar_numero(valor):
+            error = "Solo se permiten números"
+
+    # CSS dinámico para borde rojo
+    if error:
+        st.markdown(f"""
+        <style>
+        div[data-testid="stTextInput"] input[key="{key}"] {{
+            border: 2px solid #ef4444 !important;
+        }}
+        </style>
+        """, unsafe_allow_html=True)
+
+        st.markdown(f"<p style='color:#ef4444; font-size:12px; margin-top:-10px'>{error}</p>", unsafe_allow_html=True)
+
+    return valor, error
+
+# =========================================================
+# FUNCIÓN API (SIN CAMBIOS)
 # =========================================================
 def llamar_api(data):
     intentos = 3
-    for _ in range(intentos):
+
+    for i in range(intentos):
         try:
             response = requests.post(API_URL, json=data, timeout=40)
+
             if response.status_code == 200:
                 return response
+
             elif response.status_code == 429:
                 time.sleep(3)
+
             else:
                 return response
-        except:
+
+        except requests.exceptions.RequestException:
             time.sleep(3)
+
     return None
 
 # =========================================================
-# ESTILOS (TU DISEÑO + INPUT ERROR)
+# ESTILOS (ORIGINAL)
 # =========================================================
 st.markdown("""
 <style>
@@ -54,6 +95,8 @@ html, body, [class*="css"]  {
     -webkit-text-fill-color: transparent;
     font-weight: 800;
     font-size: 60px !important;
+    margin-top: -30px !important;
+    margin-bottom: 5px !important;
 }
 
 .subtitle {
@@ -63,7 +106,6 @@ html, body, [class*="css"]  {
     margin-bottom: 30px;
 }
 
-/* BOTÓN ORIGINAL */
 div.stButton > button {
     display: block;
     margin: 0 auto;
@@ -83,26 +125,12 @@ div.stButton > button:hover {
     transform: scale(1.02);
 }
 
-/* RESULTADO */
 .result-box {
     padding: 30px;
     border-radius: 15px;
     text-align: center;
     margin-top: 25px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* INPUT ERROR */
-div[data-testid="stTextInput"] input.error {
-    border: 2px solid #ef4444 !important;
-}
-
-/* TEXTO ERROR */
-.error-text {
-    color: #ef4444;
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 10px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -114,39 +142,17 @@ st.markdown('<h1 class="main-title">Análisis de Retención</h1>', unsafe_allow_
 st.markdown('<p class="subtitle">Plataforma de Inteligencia Predictiva para la Toma de Decisiones</p>', unsafe_allow_html=True)
 
 # =========================================================
-# INPUT CON ERROR
+# INPUTS (MEJORADOS)
 # =========================================================
-def input_con_error(label, key, placeholder=""):
-    error = st.session_state.errors.get(key)
+errores = []
 
-    value = st.text_input(label, key=key, placeholder=placeholder)
-
-    if error:
-        st.markdown(f"""
-        <script>
-        const inputs = window.parent.document.querySelectorAll('input');
-        inputs.forEach(el => {{
-            if (el.getAttribute('aria-label') === "{label}") {{
-                el.classList.add('error');
-            }}
-        }});
-        </script>
-        """, unsafe_allow_html=True)
-
-        st.markdown(f"<div class='error-text'>⚠ {error}</div>", unsafe_allow_html=True)
-
-    return value
-
-# =========================================================
-# INPUTS
-# =========================================================
 with st.container():
     col1, col2 = st.columns(2)
 
     with col1:
-        tenure = input_con_error("Antigüedad del cliente (Meses)", "tenure", "Ej: 12")
-        MonthlyCharges = input_con_error("Cargo Mensual ($)", "MonthlyCharges", "Ej: 75.5")
-        TotalCharges = input_con_error("Cargos Totales Acumulados ($)", "TotalCharges", "Ej: 900.25")
+        tenure, e1 = campo_input("Antigüedad del cliente (Meses)", "tenure", "Ej: 12", "numero")
+        MonthlyCharges, e2 = campo_input("Cargo Mensual ($)", "MonthlyCharges", "Ej: 70.5", "numero")
+        TotalCharges, e3 = campo_input("Cargos Totales ($)", "TotalCharges", "Ej: 1200.75", "numero")
 
         gender = st.selectbox("Género", ["Male", "Female"])
         Partner = st.selectbox("¿Tiene Pareja?", ["Yes", "No"])
@@ -161,96 +167,77 @@ with st.container():
             "Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"
         ])
 
+errores = [e for e in [e1, e2, e3] if e]
+
 # =========================================================
-# BOTÓN
+# BOTÓN (ORIGINAL)
 # =========================================================
 st.markdown("<br>", unsafe_allow_html=True)
 
 if st.button("Analizar Perfil del Cliente") and not st.session_state.loading:
 
-    st.session_state.loading = True
-    st.session_state.errors = {}
+    st.session_state.submitted = True
 
-    # VALIDACIÓN
-    if not tenure:
-        st.session_state.errors["tenure"] = "Campo obligatorio"
-    elif not tenure.isdigit():
-        st.session_state.errors["tenure"] = "Solo números enteros"
+    if errores:
+        st.warning("Corrige los campos en rojo antes de continuar.")
+    else:
+        st.session_state.loading = True
 
-    try:
-        float(MonthlyCharges)
-    except:
-        st.session_state.errors["MonthlyCharges"] = "Debe ser un número válido"
+        data = {
+            "SeniorCitizen": 0,
+            "tenure": int(tenure),
+            "MonthlyCharges": float(MonthlyCharges),
+            "TotalCharges": float(TotalCharges),
+            "gender": gender,
+            "Partner": Partner,
+            "Dependents": Dependents,
+            "PhoneService": PhoneService,
+            "MultipleLines": "No",
+            "InternetService": InternetService,
+            "OnlineSecurity": "No",
+            "OnlineBackup": "Yes",
+            "DeviceProtection": "No",
+            "TechSupport": "Yes",
+            "StreamingTV": "Yes",
+            "StreamingMovies": "Yes",
+            "Contract": Contract,
+            "PaperlessBilling": PaperlessBilling,
+            "PaymentMethod": PaymentMethod
+        }
 
-    try:
-        float(TotalCharges)
-    except:
-        st.session_state.errors["TotalCharges"] = "Debe ser un número válido"
+        with st.spinner('Procesando datos con el motor de IA...'):
 
-    # SI HAY ERRORES
-    if st.session_state.errors:
-        st.session_state.loading = False
-        st.rerun()
+            response = llamar_api(data)
 
-    # DATA
-    data = {
-        "SeniorCitizen": 0,
-        "tenure": int(tenure),
-        "MonthlyCharges": float(MonthlyCharges),
-        "TotalCharges": float(TotalCharges),
-        "gender": gender,
-        "Partner": Partner,
-        "Dependents": Dependents,
-        "PhoneService": PhoneService,
-        "MultipleLines": "No",
-        "InternetService": InternetService,
-        "OnlineSecurity": "No",
-        "OnlineBackup": "Yes",
-        "DeviceProtection": "No",
-        "TechSupport": "Yes",
-        "StreamingTV": "Yes",
-        "StreamingMovies": "Yes",
-        "Contract": Contract,
-        "PaperlessBilling": PaperlessBilling,
-        "PaymentMethod": PaymentMethod
-    }
+            if response and response.status_code == 200:
+                result = response.json()
+                prob = result["probability"]
 
-    # =========================================================
-    # RESULTADO (TU DISEÑO ORIGINAL)
-    # =========================================================
-    with st.spinner('Procesando datos con el motor de IA...'):
+                st.toast("Análisis finalizado con éxito", icon="🎯")
 
-        response = llamar_api(data)
+                if prob > 0.5:
+                    st.markdown(f"""
+                    <div class="result-box" style="background-color:#f8d7da;">
+                        <h2>ALTA PROBABILIDAD DE ABANDONO</h2>
+                        <p>{prob*100:.1f}%</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                else:
+                    st.markdown(f"""
+                    <div class="result-box" style="background-color:#d4edda;">
+                        <h2>BAJO RIESGO DE ABANDONO</h2>
+                        <p>{prob*100:.1f}%</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    st.balloons()
 
-        if response and response.status_code == 200:
-            result = response.json()
-            prob = result["probability"]
+            elif response and response.status_code == 429:
+                st.warning("⏳ El sistema está iniciando. Intenta de nuevo en unos segundos.")
 
-            st.toast("Análisis finalizado con éxito", icon="🎯")
-
-            if prob > 0.5:
-                st.markdown(f"""
-                <div class="result-box" style="background-color:#f8d7da;">
-                    <h2>ALTA PROBABILIDAD DE ABANDONO</h2>
-                    <p>{prob*100:.1f}%</p>
-                </div>
-                """, unsafe_allow_html=True)
             else:
-                st.markdown(f"""
-                <div class="result-box" style="background-color:#d4edda;">
-                    <h2>BAJO RIESGO DE ABANDONO</h2>
-                    <p>{prob*100:.1f}%</p>
-                </div>
-                """, unsafe_allow_html=True)
-                st.balloons()
+                st.error("⚠️ No se pudo conectar con el servicio.")
 
-        elif response and response.status_code == 429:
-            st.warning("⏳ El sistema está iniciando. Intenta de nuevo en unos segundos.")
-
-        else:
-            st.error("⚠️ No se pudo conectar con el servicio.")
-
-    st.session_state.loading = False
+        st.session_state.loading = False
 
 # =========================================================
 # FOOTER

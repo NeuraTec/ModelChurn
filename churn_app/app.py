@@ -10,23 +10,16 @@ API_URL = "https://modelchurn.onrender.com/predict"
 st.set_page_config(page_title="NeuraTec | Churn Analytics", layout="centered")
 
 # =========================================================
-# WARM-UP SUAVE (1 sola vez)
-# =========================================================
-if "api_ready" not in st.session_state:
-    try:
-        requests.get("https://modelchurn.onrender.com", timeout=10)
-        st.session_state.api_ready = True
-    except:
-        st.session_state.api_ready = False
-
-# =========================================================
-# ESTADO (ANTI MULTI-CLICK)
+# ESTADOS
 # =========================================================
 if "loading" not in st.session_state:
     st.session_state.loading = False
 
+if "errors" not in st.session_state:
+    st.session_state.errors = {}
+
 # =========================================================
-# FUNCIÓN PRO: LLAMADA A API CON RETRY
+# FUNCIÓN API
 # =========================================================
 def llamar_api(data):
     intentos = 3
@@ -50,7 +43,7 @@ def llamar_api(data):
     return None
 
 # =========================================================
-# ESTILOS
+# CSS (AGREGADO BORDE ROJO)
 # =========================================================
 st.markdown("""
 <style>
@@ -67,51 +60,36 @@ html, body, [class*="css"]  {
     -webkit-text-fill-color: transparent;
     font-weight: 800;
     font-size: 60px !important;
-    margin-top: -30px !important;
-    margin-bottom: 5px !important;
 }
 
-.subtitle {
-    text-align: center;
-    color: #64748b;
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-div.stButton > button {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    border-radius: 8px;
-    height: 55px;
-    background-color: #3b82f6;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    transition: 0.3s;
-}
-
-div.stButton > button:hover {
-    background-color: #2563eb;
-    transform: scale(1.02);
-}
-
-.result-box {
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    margin-top: 25px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.input-error input {
+    border: 2px solid #ef4444 !important;
+    border-radius: 6px;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # =========================================================
+# FUNCION INPUT CON ERROR
+# =========================================================
+def input_con_error(label, key, placeholder=""):
+    error = st.session_state.errors.get(key)
+
+    if error:
+        st.markdown('<div class="input-error">', unsafe_allow_html=True)
+
+    value = st.text_input(label, key=key, placeholder=placeholder)
+
+    if error:
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown(f"<p style='color:#ef4444; font-size:12px;'>⚠ {error}</p>", unsafe_allow_html=True)
+
+    return value
+
+# =========================================================
 # HEADER
 # =========================================================
 st.markdown('<h1 class="main-title">Análisis de Retención</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Plataforma de Inteligencia Predictiva para la Toma de Decisiones</p>', unsafe_allow_html=True)
 
 # =========================================================
 # INPUTS
@@ -120,23 +98,9 @@ with st.container():
     col1, col2 = st.columns(2)
 
     with col1:
-        tenure = st.text_input(
-            "Antigüedad del cliente (Meses)",
-            value="",
-            placeholder="Ej: 12"
-        )
-
-        MonthlyCharges = st.text_input(
-            "Cargo Mensual ($)",
-            value="",
-            placeholder="Ej: 75.5"
-        )
-
-        TotalCharges = st.text_input(
-            "Cargos Totales Acumulados ($)",
-            value="",
-            placeholder="Ej: 900.25"
-        )
+        tenure = input_con_error("Antigüedad del cliente (Meses)", "tenure", "Ej: 12")
+        MonthlyCharges = input_con_error("Cargo Mensual ($)", "MonthlyCharges", "Ej: 75.5")
+        TotalCharges = input_con_error("Cargos Totales ($)", "TotalCharges", "Ej: 900.25")
 
         gender = st.selectbox("Género", ["Selecciona...", "Male", "Female"])
         Partner = st.selectbox("¿Tiene Pareja?", ["Selecciona...", "Yes", "No"])
@@ -158,85 +122,80 @@ with st.container():
 # =========================================================
 # BOTÓN
 # =========================================================
-st.markdown("<br>", unsafe_allow_html=True)
-
 if st.button("Analizar Perfil del Cliente") and not st.session_state.loading:
 
     st.session_state.loading = True
+    st.session_state.errors = {}
 
-    # VALIDACIONES NUEVAS
-    if (
-        not tenure or not MonthlyCharges or not TotalCharges or
-        "Selecciona..." in [
-            gender, Partner, Dependents, PhoneService,
-            InternetService, Contract, PaperlessBilling, PaymentMethod
-        ]
-    ):
-        st.warning("Por favor, complete todos los campos correctamente.")
+    # VALIDACIONES
+    if not tenure:
+        st.session_state.errors["tenure"] = "Este campo es obligatorio"
+    elif not tenure.isdigit():
+        st.session_state.errors["tenure"] = "Debe ser un número entero (ej: 12)"
+
+    try:
+        float(MonthlyCharges)
+    except:
+        st.session_state.errors["MonthlyCharges"] = "Debe ser un número válido (ej: 75.5)"
+
+    try:
+        float(TotalCharges)
+    except:
+        st.session_state.errors["TotalCharges"] = "Debe ser un número válido (ej: 900.25)"
+
+    if "Selecciona..." in [
+        gender, Partner, Dependents, PhoneService,
+        InternetService, Contract, PaperlessBilling, PaymentMethod
+    ]:
+        st.warning("Seleccione todas las opciones")
+
+    # SI HAY ERRORES
+    if st.session_state.errors:
+        st.warning("Corrige los campos en rojo")
         st.session_state.loading = False
-    else:
-        data = {
-            "SeniorCitizen": 0,
-            "tenure": int(tenure),
-            "MonthlyCharges": float(MonthlyCharges),
-            "TotalCharges": float(TotalCharges),
-            "gender": gender,
-            "Partner": Partner,
-            "Dependents": Dependents,
-            "PhoneService": PhoneService,
-            "MultipleLines": "No",
-            "InternetService": InternetService,
-            "OnlineSecurity": "No",
-            "OnlineBackup": "Yes",
-            "DeviceProtection": "No",
-            "TechSupport": "Yes",
-            "StreamingTV": "Yes",
-            "StreamingMovies": "Yes",
-            "Contract": Contract,
-            "PaperlessBilling": PaperlessBilling,
-            "PaymentMethod": PaymentMethod
-        }
+        st.stop()
 
-        with st.spinner('Procesando datos con el motor de IA...'):
+    # DATA
+    data = {
+        "SeniorCitizen": 0,
+        "tenure": int(tenure),
+        "MonthlyCharges": float(MonthlyCharges),
+        "TotalCharges": float(TotalCharges),
+        "gender": gender,
+        "Partner": Partner,
+        "Dependents": Dependents,
+        "PhoneService": PhoneService,
+        "MultipleLines": "No",
+        "InternetService": InternetService,
+        "OnlineSecurity": "No",
+        "OnlineBackup": "Yes",
+        "DeviceProtection": "No",
+        "TechSupport": "Yes",
+        "StreamingTV": "Yes",
+        "StreamingMovies": "Yes",
+        "Contract": Contract,
+        "PaperlessBilling": PaperlessBilling,
+        "PaymentMethod": PaymentMethod
+    }
 
-            response = llamar_api(data)
+    with st.spinner("Procesando..."):
+        response = llamar_api(data)
 
-            if response and response.status_code == 200:
-                result = response.json()
-                prob = result["probability"]
+        if response and response.status_code == 200:
+            result = response.json()
+            prob = result["probability"]
 
-                st.toast("Análisis finalizado con éxito", icon="🎯")
+            st.success("Predicción realizada")
 
-                if prob > 0.5:
-                    st.markdown(f"""
-                    <div class="result-box" style="background-color:#f8d7da;">
-                        <h2>ALTA PROBABILIDAD DE ABANDONO</h2>
-                        <p>{prob*100:.1f}%</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                else:
-                    st.markdown(f"""
-                    <div class="result-box" style="background-color:#d4edda;">
-                        <h2>BAJO RIESGO DE ABANDONO</h2>
-                        <p>{prob*100:.1f}%</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    st.balloons()
-
-            elif response and response.status_code == 429:
-                st.warning("⏳ El sistema está iniciando. Intenta de nuevo en unos segundos.")
-
+            if prob > 0.5:
+                st.error(f"ALTO RIESGO: {prob*100:.1f}%")
             else:
-                st.error("⚠️ No se pudo conectar con el servicio.")
+                st.success(f"BAJO RIESGO: {prob*100:.1f}%")
 
-        st.session_state.loading = False
+        elif response and response.status_code == 429:
+            st.warning("⏳ El sistema está iniciando, intenta nuevamente")
 
-# =========================================================
-# FOOTER
-# =========================================================
-st.markdown("""
-<hr>
-<div style='text-align:center; font-size:12px; color:#94a3b8;'>
-© 2026 NeuraTec | Inteligencia Predictiva
-</div>
-""", unsafe_allow_html=True)
+        else:
+            st.error("⚠️ No se pudo conectar con el servicio")
+
+    st.session_state.loading = False

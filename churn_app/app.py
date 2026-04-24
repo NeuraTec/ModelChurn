@@ -10,6 +10,16 @@ API_URL = "https://modelchurn.onrender.com/predict"
 st.set_page_config(page_title="NeuraTec | Churn Analytics", layout="centered")
 
 # =========================================================
+# WARM-UP SUAVE (1 sola vez)
+# =========================================================
+if "api_ready" not in st.session_state:
+    try:
+        requests.get("https://modelchurn.onrender.com", timeout=10)
+        st.session_state.api_ready = True
+    except:
+        st.session_state.api_ready = False
+
+# =========================================================
 # ESTADO (ANTI MULTI-CLICK)
 # =========================================================
 if "loading" not in st.session_state:
@@ -40,7 +50,7 @@ def llamar_api(data):
     return None
 
 # =========================================================
-# ESTILOS (SIN CAMBIOS)
+# ESTILOS
 # =========================================================
 st.markdown("""
 <style>
@@ -110,20 +120,39 @@ with st.container():
     col1, col2 = st.columns(2)
 
     with col1:
-        tenure = st.text_input("Antigüedad del cliente (Meses)")
-        MonthlyCharges = st.text_input("Cargo Mensual ($)")
-        TotalCharges = st.text_input("Cargos Totales Acumulados ($)")
-        gender = st.selectbox("Género", ["Male", "Female"])
-        Partner = st.selectbox("¿Tiene Pareja?", ["Yes", "No"])
-        Dependents = st.selectbox("¿Tiene Dependientes?", ["Yes", "No"])
+        tenure = st.text_input(
+            "Antigüedad del cliente (Meses)",
+            value="",
+            placeholder="Ej: 12"
+        )
+
+        MonthlyCharges = st.text_input(
+            "Cargo Mensual ($)",
+            value="",
+            placeholder="Ej: 75.5"
+        )
+
+        TotalCharges = st.text_input(
+            "Cargos Totales Acumulados ($)",
+            value="",
+            placeholder="Ej: 900.25"
+        )
+
+        gender = st.selectbox("Género", ["Selecciona...", "Male", "Female"])
+        Partner = st.selectbox("¿Tiene Pareja?", ["Selecciona...", "Yes", "No"])
+        Dependents = st.selectbox("¿Tiene Dependientes?", ["Selecciona...", "Yes", "No"])
 
     with col2:
-        PhoneService = st.selectbox("Servicio Telefónico", ["Yes", "No"])
-        InternetService = st.selectbox("Tipo de Internet", ["DSL", "Fiber optic", "No"])
-        Contract = st.selectbox("Tipo de Contrato", ["Month-to-month", "One year", "Two year"])
-        PaperlessBilling = st.selectbox("Facturación Electrónica", ["Yes", "No"])
+        PhoneService = st.selectbox("Servicio Telefónico", ["Selecciona...", "Yes", "No"])
+        InternetService = st.selectbox("Tipo de Internet", ["Selecciona...", "DSL", "Fiber optic", "No"])
+        Contract = st.selectbox("Tipo de Contrato", ["Selecciona...", "Month-to-month", "One year", "Two year"])
+        PaperlessBilling = st.selectbox("Facturación Electrónica", ["Selecciona...", "Yes", "No"])
         PaymentMethod = st.selectbox("Método de Pago", [
-            "Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"
+            "Selecciona...",
+            "Electronic check",
+            "Mailed check",
+            "Bank transfer (automatic)",
+            "Credit card (automatic)"
         ])
 
 # =========================================================
@@ -135,8 +164,15 @@ if st.button("Analizar Perfil del Cliente") and not st.session_state.loading:
 
     st.session_state.loading = True
 
-    if not tenure or not MonthlyCharges or not TotalCharges:
-        st.warning("Por favor, complete la información requerida.")
+    # VALIDACIONES NUEVAS
+    if (
+        not tenure or not MonthlyCharges or not TotalCharges or
+        "Selecciona..." in [
+            gender, Partner, Dependents, PhoneService,
+            InternetService, Contract, PaperlessBilling, PaymentMethod
+        ]
+    ):
+        st.warning("Por favor, complete todos los campos correctamente.")
         st.session_state.loading = False
     else:
         data = {

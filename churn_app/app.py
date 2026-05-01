@@ -58,7 +58,7 @@ st.markdown('<h1 class="main-title">Análisis de Retención</h1>', unsafe_allow_
 st.markdown('<p class="subtitle">Plataforma de Inteligencia Predictiva para la Toma de Decisiones</p>', unsafe_allow_html=True)
 
 # =========================================================
-# COMPONENTE DE INPUT PERSONALIZADO con BORDE ROJO 
+# COMPONENTE DE INPUT PERSONALIZADO CON BORDE ROJO 
 # =========================================================
 def input_con_error(label, key, placeholder=""):
     error = st.session_state.errors.get(key)

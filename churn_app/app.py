@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import time
 
 API_URL = "https://modelchurn.onrender.com/predict"
 
@@ -18,7 +17,24 @@ if "show_warning" not in st.session_state:
     st.session_state.show_warning = False
 
 # =========================================================
-# ESTILOS CSS
+# LÓGICA DE VALIDACIÓN
+# =========================================================
+def validar_campo_live(key):
+    valor = st.session_state[key]
+    if key == "tenure":
+        if not valor: st.session_state.errors[key] = "Campo obligatorio"
+        elif not valor.isdigit(): st.session_state.errors[key] = "Solo números enteros"
+        else: st.session_state.errors.pop(key, None)
+    elif key in ["MonthlyCharges", "TotalCharges"]:
+        if not valor: st.session_state.errors[key] = "Campo obligatorio"
+        else:
+            try:
+                float(valor)
+                st.session_state.errors.pop(key, None)
+            except ValueError: st.session_state.errors[key] = "Debe ser un número válido"
+
+# =========================================================
+# ESTILOS CSS (INCLUYENDO TU NUEVA REGLA PARA LA "X")
 # =========================================================
 st.markdown("""
 <style>
@@ -40,61 +56,75 @@ div.stButton > button {
     height: 55px; background-color: #3b82f6; color: white;
     font-size: 20px; font-weight: bold; border: none; transition: 0.3s;
 }
-div.stButton > button:hover { background-color: #2563eb; transform: scale(1.01); }
 
-.error-text {
-    color: #ef4444; font-size: 13px; font-weight: 600;
-    margin-top: -15px; margin-bottom: 15px; display: block;
+/* --- FOCO AZUL Y ELIMINACIÓN DE SOBREBORDE --- */
+[data-baseweb="input"], [data-baseweb="select"] {
+    outline: none !important;
+    border: none !important;
 }
 
+div[data-baseweb="input"] > div, 
+div[data-baseweb="base-input"],
+div[data-baseweb="select"] > div {
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+div[data-baseweb="input"]:focus-within > div,
+div[data-baseweb="base-input"]:focus-within,
+div[data-baseweb="select"]:focus-within > div {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 1px #3b82f6 !important;
+}
+
+/* --- TU AJUSTE: OCULTAR LA "X" DE LIMPIAR EN SELECTBOX --- */
+div[role="button"][aria-label="Clear value"],
+button[title="Clear value"],
+button[aria-label="Clear value"],
+div[data-baseweb="select"] [aria-label="Clear value"],
+div[data-baseweb="select"] [title="Clear value"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+input { border: none !important; }
+
+.error-text { color: #ef4444; font-size: 13px; font-weight: 600; margin-top: -15px; margin-bottom: 15px; display: block; }
 .result-box { padding: 30px; border-radius: 15px; text-align: center; margin-top: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 </style>
 """, unsafe_allow_html=True)
 
 # =========================================================
-# HEADER
+# COMPONENTE DE INPUT PERSONALIZADO
+# =========================================================
+def input_con_error(label, key, placeholder=""):
+    error = st.session_state.errors.get(key)
+    if error:
+        st.markdown(f"""<style>div[data-testid="stTextInput"] input[aria-label="{label}"] {{ border: 2px solid #ef4444 !important; background-color: #fff5f5 !important; }}</style>""", unsafe_allow_html=True)
+    val = st.text_input(label, key=key, placeholder=placeholder, on_change=validar_campo_live, args=(key,))
+    if error: st.markdown(f"<span class='error-text'>⚠ {error}</span>", unsafe_allow_html=True)
+    return val
+
+# =========================================================
+# UI PRINCIPAL
 # =========================================================
 st.markdown('<h1 class="main-title">Análisis de Retención</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Plataforma de Inteligencia Predictiva para la Toma de Decisiones</p>', unsafe_allow_html=True)
 
-# =========================================================
-# COMPONENTE DE INPUT PERSONALIZADO CON BORDE ROJO 
-# =========================================================
-def input_con_error(label, key, placeholder=""):
-    error = st.session_state.errors.get(key)
-    
-    # Selector CSS estándar usando el atributo aria-label del input
-    if error:
-        st.markdown(f"""
-        <style>
-        div[data-testid="stTextInput"] input[aria-label="{label}"] {{
-            border: 2px solid #ef4444 !important;
-            background-color: #fff5f5 !important;
-        }}
-        </style>
-        """, unsafe_allow_html=True)
-
-    val = st.text_input(label, key=key, placeholder=placeholder)
-    
-    if error:
-        st.markdown(f"<span class='error-text'>⚠ {error}</span>", unsafe_allow_html=True)
-    return val
-
-# =========================================================
-# FORMULARIO
-# =========================================================
 with st.container():
     col1, col2 = st.columns(2)
-
     with col1:
         tenure = input_con_error("Antigüedad del cliente (Meses)", "tenure", "Ej: 12")
         MonthlyCharges = input_con_error("Cargo Mensual ($)", "MonthlyCharges", "Ej: 75.5")
         TotalCharges = input_con_error("Cargos Totales Acumulados ($)", "TotalCharges", "Ej: 900.25")
-        
         gender = st.selectbox("Género", ["Masculino", "Femenino"], index=None, placeholder="Seleccione...")
         Partner = st.selectbox("¿Tiene Pareja?", ["Sí", "No"], index=None, placeholder="Seleccione...")
         Dependents = st.selectbox("¿Tiene Dependientes?", ["Sí", "No"], index=None, placeholder="Seleccione...")
-
     with col2:
         PhoneService = st.selectbox("Servicio Telefónico", ["Sí", "No"], index=None, placeholder="Seleccione...")
         InternetService = st.selectbox("Tipo de Internet", ["DSL", "Fibra óptica", "No"], index=None, placeholder="Seleccione...")
@@ -106,33 +136,17 @@ with st.container():
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# =========================================================
-# BOTÓN Y VALIDACIÓN
-# =========================================================
 if st.button("Analizar Perfil del Cliente"):
-    new_errors = {}
+    validar_campo_live("tenure")
+    validar_campo_live("MonthlyCharges")
+    validar_campo_live("TotalCharges")
     
-    # Validar campos numéricos
-    if not tenure: new_errors["tenure"] = "Campo obligatorio"
-    elif not tenure.isdigit(): new_errors["tenure"] = "Solo números enteros"
-    
-    try: float(MonthlyCharges)
-    except: new_errors["MonthlyCharges"] = "Debe ser un número válido"
-    
-    try: float(TotalCharges)
-    except: new_errors["TotalCharges"] = "Debe ser un número válido"
-    
-    # Validar selectores
     dropdowns = [gender, Partner, Dependents, PhoneService, InternetService, Contract, PaperlessBilling, PaymentMethod]
     st.session_state.show_warning = any(x is None for x in dropdowns)
 
-    # Guardar errores y recargar para aplicar estilos inmediatamente
-    st.session_state.errors = new_errors
-    
-    if new_errors or st.session_state.show_warning:
+    if st.session_state.errors or st.session_state.show_warning:
         st.rerun()
 
-    # Si todo está OK, procesar con la API (Mapeo a Inglés)
     data = {
         "SeniorCitizen": 0, "tenure": int(tenure),
         "MonthlyCharges": float(MonthlyCharges), "TotalCharges": float(TotalCharges),
@@ -158,16 +172,23 @@ if st.button("Analizar Perfil del Cliente"):
             if response.status_code == 200:
                 prob = response.json()["probability"]
                 if prob > 0.5:
-                    st.markdown(f'<div class="result-box" style="background-color:#f8d7da; color:#721c24;"><h2>ALTA PROBABILIDAD DE ABANDONO</h2><h3>{prob*100:.1f}%</h3></div>', unsafe_allow_html=True)
+                    st.markdown(f'''
+                        <div class="result-box" style="background-color:#f8d7da; color:#721c24; border: 1px solid #f5c6cb;">
+                            <h2 style="margin:0;">ALTA PROBABILIDAD DE ABANDONO</h2>
+                            <h3 style="margin:10px 0 0 0; font-size:40px;">{prob*100:.1f}%</h3>
+                        </div>
+                    ''', unsafe_allow_html=True)
                 else:
-                    st.markdown(f'<div class="result-box" style="background-color:#d4edda; color:#155724;"><h2>BAJO RIESGO DE ABANDONO</h2><h3>{prob*100:.1f}%</h3></div>', unsafe_allow_html=True)
+                    st.markdown(f'''
+                        <div class="result-box" style="background-color:#d4edda; color:#155724; border: 1px solid #c3e6cb;">
+                            <h2 style="margin:0;">BAJO RIESGO DE ABANDONO</h2>
+                            <h3 style="margin:10px 0 0 0; font-size:40px;">{prob*100:.1f}%</h3>
+                        </div>
+                    ''', unsafe_allow_html=True)
                     st.balloons()
-            else:
-                st.error("Error al obtener la predicción.")
-        except:
-            st.error("Servidor fuera de línea.")
+            else: st.error("Error en la predicción.")
+        except: st.error("Servidor no disponible.")
 
-# Mostrar advertencia si faltan selectores
 if st.session_state.show_warning:
     st.warning("⚠️ Por favor, complete todas las selecciones de los menús desplegables.")
 

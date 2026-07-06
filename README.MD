@@ -5,14 +5,18 @@ Este proyecto implementa un sistema completo de predicción de **churn de client
 El objetivo es demostrar cómo un modelo de Machine Learning puede integrarse en un sistema real tipo producto.
 
 ---
+## 📂 Dataset
+
+Este proyecto fue desarrollado utilizando el dataset público **Telco Customer Churn** disponible en Kaggle, con fines educativos y de demostración.
+
+Dataset:
+https://www.kaggle.com/code/bhartiprasad17/customer-churn-prediction/input
 
 ## 🚀 Demo en vivo
 
 - 🖥️ Web App (Streamlit):  
-  👉 https://tu-app.streamlit.app
 
-- ⚙️ API (Flask en Render):  
-  👉 https://tu-api.onrender.com
+  👉 https://modelchurn-r2kbcxw8pcnf6mvm23dsdp.streamlit.app/
 
 ---
 
